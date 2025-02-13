@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 
     // Course routes
     Route::get('/home', [CourseController::class, 'index'])->name('home');
-    Route::get('/courses/create', [CourseController::class, 'create'])->name('create');
+    Route::get('/create', [CourseController::class, 'create'])->name('create');
     Route::post('/courses', [CourseController::class, 'store'])->name('store');
     Route::resource('courses', CourseController::class)->except(['create', 'store']);
 });
