@@ -21,6 +21,12 @@
                                 <h3>{{ $course->name }}</h3>
                                 <span>Field: {{ $course->field }}</span>
                                 <div class="item-price">Duration: {{ $course->duration }} hours</div>
+                                <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-warning mt-2">Edit</a>
+                                <form action="{{ route('courses.destroy', $course->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger mt-2">Delete</button>
+                                </form>
                             </figcaption>
                         </div>
                     </div>

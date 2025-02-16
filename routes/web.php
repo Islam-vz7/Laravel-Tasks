@@ -30,8 +30,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Course routes
-    Route::get('/home', [CourseController::class, 'index'])->name('home');
-    Route::get('/create', [CourseController::class, 'create'])->name('create');
-    Route::post('/courses', [CourseController::class, 'store'])->name('store');
-    Route::resource('courses', CourseController::class)->except(['create', 'store']);
+    Route::resource('courses', CourseController::class);
 });

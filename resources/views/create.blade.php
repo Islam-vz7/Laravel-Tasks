@@ -6,7 +6,7 @@
 <section id="create-course" class="py-5 my-5">
     <div class="container">
         <h2 class="section-title">Create New Course</h2>
-        <form action="{{ route('store') }}" method="POST">
+        <form action="{{ route('courses.store') }}" method="POST">
             @csrf
             <div class="form-group mb-3">
                 <label for="name">Course Name</label>

@@ -28,9 +28,8 @@
                         <nav id="navbar">
                             <div class="main-menu stellarnav">
                                 <ul class="menu-list">
-                                    
-                                    <li class="menu-item"><a href="/home">Your Courses</a></li>
-                                    <li class="menu-item"><a href="/create">Create Course</a></li>
+                                    <li class="menu-item"><a href="/courses">Your Courses</a></li>
+                                    <li class="menu-item"><a href="/courses/create">Create Course</a></li>
                                     <li class="menu-item">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf

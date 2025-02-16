@@ -4,32 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
 
 class CourseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $courses = auth()->user()->courses;
+        $courses = Auth::user()->courses;
         return view('index', compact('courses'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -38,41 +27,37 @@ class CourseController extends Controller
             'field' => 'required|string|max:255',
         ]);
 
-        auth()->user()->courses()->create($request->all());
+        Auth::user()->courses()->create($request->all());
 
-        return redirect()->route('home')->with('success', 'Course created successfully.');
+        return redirect()->route('courses.index')->with('success', 'Course created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Course $course)
     {
-        $user = $course->user;
-        return view('show', compact('course', 'user'));
+        return view('show', compact('course'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Course $course)
     {
-        //
+        return view('edit', compact('course'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'duration' => 'required|integer',
+            'field' => 'required|string|max:255',
+        ]);
+
+        $course->update($request->all());
+        
+        return redirect()->route('courses.index')->with('success', 'Course updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect()->route('courses.index')->with('success', 'Course deleted successfully.');
     }
 }
